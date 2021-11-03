@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'bulma/css/bulma.css';
+import foods from './foods.json';
+import FoodBox from './FoodBox.component/FoodBox.jsx';
+import AddFood from './AddFood.component/AddFood.jsx';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const cloned = [...foods];
+
+export default class App extends React.Component {
+  state = {
+    food: cloned,
+  };
+
+  addFood = (infos) => {
+    console.log(infos);
+    const clonedFood = [...this.state.food];
+    clonedFood.push(infos);
+    this.setState({ food: clonedFood, });
+  }
+
+  render() {
+    return (
+      <div className="App">
+        {this.state.food.map((food, index) => (
+          <FoodBox props={food} />
+        ))}
+
+        <button>Add Food</button>
+        <AddFood addFoodHandler={this.addFood} />
+      </div>
+    );
+  }
 }
-
-export default App;
