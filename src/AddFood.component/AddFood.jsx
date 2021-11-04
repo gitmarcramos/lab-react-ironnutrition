@@ -4,45 +4,51 @@ export default class AddFood extends React.Component {
   state = {
     name: '',
     calories: 0,
-    images: '',
+    image: '',
     quantity: 0,
   };
 
   handleChange = (evt) => {
-    this.setState = {
+    this.setState({
       [evt.target.id]: evt.target.value,
-    };
+    });
   };
 
   handleSubmit = (evt) => {
     evt.preventDefault();
-    this.props.addFoodHandler(this.state);
+    this.props.handler(this.state);
   };
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="form">
         <div className="input-container">
-          <label htmlFor="name">Name</label>
-          <input type="text" id="name" onChange={this.handleChange}></input>
+          <label htmlFor="name" className="label">
+            Name
+          </label>
+          <input
+            type="text"
+            id="name"
+            className="input"
+            onChange={this.handleChange}
+          ></input>
         </div>
         <div className="input-container">
-          <label htmlFor="calories">Calories</label>
+          <label htmlFor="calories" className="label">
+            Calories
+          </label>
           <input
+            className="input"
             type="number"
             id="calories"
             onChange={this.handleChange}
           ></input>
         </div>
         <div className="input-container">
-          <label htmlFor="image">Image</label>
-          <input
-            type="text"
-            id="image"
-            onChange={this.handleChange}
-          ></input>
+          <label htmlFor="image" className="label">Image</label>
+          <input type="text" id="image" className="input" onChange={this.handleChange}></input>
         </div>
-        <button>Submit</button>
+        <button className="button">Submit</button>
       </form>
     );
   }
